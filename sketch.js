@@ -26,6 +26,13 @@ function setup(){
         drops.push(new Drop());
     }
 
+    thunderSprite = createSprite(random(10,370),random(10,30),10,10);
+    thunderSprite.addImage("blankImg",blank);
+    thunderSprite.addImage("thunderImg1",thunder1);
+    thunderSprite.addImage("thunderImg2",thunder2);
+    thunderSprite.addImage("thunderImg3",thunder3);
+    thunderSprite.addImage("thunderImg4",thunder4);
+
     cloud = createSprite(175, 75, 0, 0);
     cloud.addImage("cloudImage", cloudImg);
     cloud.scale = 0.75;
@@ -47,5 +54,28 @@ function draw(){
         drops[i].update();
     }
 
+    thunder();
     drawSprites();
+}
+
+function thunder(){
+    rand = Math.round(random(1,4));
+    if(frameCount%80 === 0){
+        thunderCreatedFrame = frameCount;
+        switch(rand){
+            case 1:thunderSprite.changeImage("thunderImg1");
+            break;
+            case 2:thunderSprite.changeImage("thunderImg2");
+            break;
+            case 3:thunderSprite.changeImage("thunderImg3");
+            break;
+            case 4:thunderSprite.changeImage("thunderImg4");
+            break;
+            default:break;
+        }
+        thunder.scale = random(0.3,0.6);
+    }
+    if(frameCount%80 === 10){
+        thunderSprite.changeImage("blankImg");
+    }
 }
